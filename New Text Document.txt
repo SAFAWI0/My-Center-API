@@ -1,0 +1,16 @@
+create table users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    phone VARCHAR(15),
+    email VARCHAR(100),
+	password VARCHAR(50)
+
+)
+select * from users
+
+drop table users
+
+INSERT INTO users (name, phone, email, password)
+VALUES('George Wilson', '222111333', 'george@example.com', 'georgepass');
+  
+  
