@@ -1,52 +1,18 @@
 const client = require("../db/index");
 
-async function getallorder(req, res) {
-  const result = await client.query(`select * from ordersone`);
+async function getOrders(req, res) {
+  const result = await client.query(`SELECT * FROM orders`);
   res.send(result.rows);
 }
-async function addorder(req, res) {
-  let {  product_id, user_id, location, order_date } = req.body;
-  try {
-    const result =
-      await client.query(`insert into ordersone( product_id, user_id, location,order_date)
-        values('${product_id}','${user_id}','${location}','${order_date}') RETURNING *`);
 
-    res.send({
-      success: true,
-      user: result.rows[0]
-    });
-  } catch (error) {
-    res.send({
-      feild: false,
-      ERROR: error,
-      message: "Error in adding the order"
-      
-    });
-  }
-}
-async function updateOrderStatus(req, res) {
-  const { status ,orderId} = req.body;
- 
- try{
- result= await client
-    .query(`update ordersONE set status='${status}' where id=${orderId} RETURNING *` )
-    res.send({
-      success: true,
-      user: result.rows[0]
-    });
-    
-  }catch (error) {
-    res.send({
-      feild: false,
-      ERROR: error,
-      message: "Error in adding the SET STUTS"
-      
-    });
-  }
+async function addOrders(req, res) {
+  let { price, order_ate } = req.body;
+  const result = await client.query(`INSERT INTO orders ( price,order_ate)
+    VALUES ('${price}', '${order_ate}') RETURNING *`);
+  res.send(result.rows);
 }
 
 module.exports = {
-  getallorder,
-  addorder,
-  updateOrderStatus,
+  getOrders,
+  addOrders,
 };
