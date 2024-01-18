@@ -19,13 +19,9 @@ app.use(cors());
 
 app.use(fileUpload({ limits: { fileSize: 50 * 1024 * 1024 } }));
 
-
-
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
-
 
 app.post("/upload", function (req, res) {
   req.files.file.mv(`files/${req.files.file.name}`, (err) => {
@@ -33,7 +29,6 @@ app.post("/upload", function (req, res) {
     else res.send({ err, msg: "File not uploaded" });
   });
 });
-
 
 app.post("/api/v1/upload", async function (req, res) {
   const result = await uploadFile(req.files.file.data, {
@@ -47,25 +42,13 @@ app.post("/api/v1/upload", async function (req, res) {
   res.send(result);
 });
 
-
-
-
-
-
 app.use("/api/v1/user", users);
 app.use("/api/v1/categories", categories);
 app.use("/api/v1/centers", centers);
 app.use("/api/v1/sessions", sessions);
 app.use("/api/v1/offers", offers);
 app.use("/api/v1/advertisements", advertisements);
-app.use("/api/v1/orders",checkAuth, orders);
-
-
-
-
-
-
-
+app.use("/api/v1/orders", checkAuth, orders);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
