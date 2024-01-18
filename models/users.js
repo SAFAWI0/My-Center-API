@@ -28,7 +28,7 @@ async function login(req, res) {
     } else if (name) {
       result = await client.query(`SELECT * FROM users WHERE name = '${name}'`);
     } else {
-      res.send({ success: false, msg: "Please Enter Emails" });
+      res.send({ success: false, msg: "Please Enter Email Or Name" });
       return;
     }
     if (result.rows.length === 0)
