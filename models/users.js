@@ -5,7 +5,6 @@ var jwt = require("jsonwebtoken");
 async function regster(req, res) {
   try {
   let { name, email, password, phone } = req.body;
-
   const hashPasswod = bcrypt.hashSync(password, 10);
   const result =
     await client.query(`insert into userss(name,email,password,phone)
@@ -14,7 +13,7 @@ async function regster(req, res) {
     success: true,
     user: result.rows[0],
   });
-} catch (error) {console.log("خطأ: ", error);
+} catch (error) {console.log("error: ", error);
 res.send({ success: false, msg: 'registration error' });
 }
 }
