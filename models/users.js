@@ -4,34 +4,36 @@ var jwt = require("jsonwebtoken");
 
 async function regster(req, res) {
   try {
-  let { name, email, password, phone } = req.body;
-  const hashPasswod = bcrypt.hashSync(password, 10);
-  const result =
-    await client.query(`insert into userss(name,email,password,phone)
+    let { name, email, password, phone } = req.body;
+    const hashPasswod = bcrypt.hashSync(password, 10);
+    const result =
+      await client.query(`insert into users(name,email,password,phone)
       values('${name}','${email}','${hashPasswod}','${phone}') RETURNING *`);
-  res.send({
-    success: true,
-    user: result.rows[0],
-  });
-} catch (error) {console.log("error: ", error);
-res.send({ success: false, msg: 'registration error' });
+    res.send({
+      success: true,
+      user: result.rows[0],
+    });
+  } catch (error) {
+    console.log("error: ", error);
+    res.send({ success: false, msg: "registration error" });
+  }
 }
-}
-
-
-
-
 
 async function login(req, res) {
   let { email, password, name } = req.body;
   try {
     let result;
     if (email) {
-      result = await client.query( `SELECT * FROM users WHERE email = '${email}'`);
+      result = await client.query(
+        `SELECT * FROM users WHERE email = '${email}'`
+      );
     } else if (name) {
       result = await client.query(`SELECT * FROM users WHERE name = '${name}'`);
     } else {
-      res.send({ success: false, msg: "Please Enter Email or Full Name and Password" });
+      res.send({
+        success: false,
+        msg: "Please Enter Email or Full Name and Password",
+      });
       return;
     }
     if (result.rows.length === 0)
