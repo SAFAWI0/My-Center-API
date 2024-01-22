@@ -51,7 +51,18 @@ async function login(req, res) {
   }
 }
 
+async function filter(req, res) {
+  try {
+    let { email } = req.body;
+    const result = await client.query(
+      `SELECT * FROM users WHERE email = '${email}'`
+    );
+    res.send(result.rows);
+  } catch {}
+}
+
 module.exports = {
   regster,
   login,
+  filter,
 };
