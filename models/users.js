@@ -61,7 +61,7 @@ async function filter(req, res) {
   } catch {}
 }
 
->>>>>>>>> Temporary merge branch 2
+
 module.exports = {
   regster,
   login,
