@@ -1,0 +1,12 @@
+
+s_oo2f_user user
+0bTXSQtLON4ql3IVs7zjmSB59nu0sgYU pass
+dpg-cm2s3oa1hbls73fsr540-a.oregon-postgres.render.com host
+s_oo2f dbname
+
+
+ 
+my_center_mhjf_user
+lQGdrqbvi8jwnwYlPn8oX3lZPgmWSH86
+dpg-cmk521ol5elc739u4gng-a.oregon-postgres.render.com
+my_center_mhjf
