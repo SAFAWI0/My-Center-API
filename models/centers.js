@@ -1,10 +1,23 @@
 const client = require("../db/index");
 
 async function getCenters(req, res) {
-  const result = await client.query(`SELECT * FROM centers`);
+  let search = req.query.search || "";
+  const result = await client.query(`SELECT * FROM centers WHERE center_name ILIKE '%${search}%'`);
   res.send(result.rows);
 }
 
+async function getCentersByCat (req, res) {
+  let cat = req.query.cat || "";
+  const result = await client.query(
+    `SELECT * FROM centers WHERE cat_id = '${cat}' `);
+  res.send(result.rows);
+}
+
+
+
+
+
 module.exports = {
   getCenters,
+  getCentersByCat,
 };

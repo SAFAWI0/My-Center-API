@@ -61,8 +61,18 @@ async function filter(req, res) {
   } catch {}
 }
 
+async function updateUsers(req, res) {
+  let id = req.params.id;
+  let { name, phone, email, password } = req.body;
+  const hashPasswod = bcrypt.hashSync(password, 10);
+  const result = await client.query(`UPDATE users
+  SET name = '${name}' , phone = '${phone}' , email = '${email}',password='${hashPasswod}' WHERE user_id = ${id} RETURNING *`);
+  res.send(result.rows);
+}
+
 module.exports = {
   regster,
   login,
   filter,
+  updateUsers,
 };
