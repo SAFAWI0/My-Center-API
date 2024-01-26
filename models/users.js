@@ -2,6 +2,16 @@ const client = require("../db/index");
 //const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 
+async function alluser(req, res) {
+  
+    const result = await client.query(
+      `SELECT * FROM users `
+    );
+    res.send(result.rows);
+
+}
+
+
 async function regster(req, res) {
   try {
     let { name, email, password, phone } = req.body;
@@ -71,6 +81,7 @@ async function updateUsers(req, res) {
 }
 
 module.exports = {
+  alluser,
   regster,
   login,
   filter,
