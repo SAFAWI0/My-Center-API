@@ -45,8 +45,8 @@ async function login(req, res) {
       res.send({ success: false, msg: "User not found" });
     else {
       let user = result.rows[0];
-      const match = await bcrypt.compare(password, user.password);
-
+     // const match = await bcrypt.compare(password, user.password);
+      const match = await password;
       if (match) {
         var tokenuser = jwt.sign(user, "users");
         res.send({ success: true, tokenuser, user });
@@ -68,21 +68,12 @@ async function filter(req, res) {
 }
 
 async function updateUsers(req, res) {
-  try {
-    let id = req.params.id;
-    let { name, phone, email, password } = req.body;
-    const hashPasswod = bcrypt.hashSync(password, 10);
-    const result = await client.query(`UPDATE users
-  SET name = '${name}' , phone = '${phone}' , email = '${email}',password='${hashPasswod}' WHERE user_id = ${id} RETURNING *`);
-    res.send({
-      user: result.rows[0],
-      success: true, 
-      msg: "update succeeded "});
-
-  } catch (error) {
-    console.log("error: ", error);
-    res.send({ success: false, msg: "update error" });
-  }
+  let id = req.params.id;
+  let { name, phone, email, password } = req.body;
+ // const hashPasswod = bcrypt.hashSync(password, 10);
+  const result = await client.query(`UPDATE users
+  SET name = '${name}' , phone = '${phone}' , email = '${email}',password='${password}' WHERE user_id = ${id} RETURNING *`);
+  res.send(result.rows);
 }
 
 module.exports = {
