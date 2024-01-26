@@ -10,3 +10,10 @@ my_center_mhjf_user
 lQGdrqbvi8jwnwYlPn8oX3lZPgmWSH86
 dpg-cmk521ol5elc739u4gng-a.oregon-postgres.render.com
 my_center_mhjf
+
+
+apiKey: "AIzaSyDvkL52hVjmqVc8kIIE3yLMHC-sf9Lsw6w" //google map
+
+DATABASE_CONNECTION=postgres://my_center_mhjf_user:lQGdrqbvi8jwnwYlPn8oX3lZPgmWSH86@dpg-cmk521ol5elc739u4gng-a.oregon-postgres.render.com/my_center_mhjf?ssl=true #key for database
+
+publicKey=e7f333049a74f95ba743 #key for uploadcare
