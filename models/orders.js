@@ -6,9 +6,10 @@ async function getOrders(req, res) {
 }
 
 async function addOrders(req, res) {
-  let { price, order_ate } = req.body;
-  const result = await client.query(`INSERT INTO orders ( price,order_ate)
-    VALUES ('${price}', '${order_ate}') RETURNING *`);
+  let { items } = req.body;
+  const result = await client.query( "INSERT INTO orders ( items) VALUES ($1) RETURNING *",
+  [ JSON.stringify(items)]
+  );
   res.send(result.rows);
 }
 

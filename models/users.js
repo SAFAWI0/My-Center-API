@@ -37,7 +37,7 @@ async function login(req, res) {
     } else {
       res.send({
         success: false,
-        msg: "Please Enter Email or Full Name and Password",
+        msg: "Please Enter Email and Password",
       });
       return;
     }
@@ -76,9 +76,9 @@ async function updateUsers(req, res) {
   SET name = '${name}' , phone = '${phone}' , email = '${email}',password='${hashPasswod}' WHERE user_id = ${id} RETURNING *`);
     res.send({
       user: result.rows[0],
-      success: true, 
-      msg: "update succeeded "});
-
+      success: true,
+      msg: "update succeeded ",
+    });
   } catch (error) {
     console.log("error: ", error);
     res.send({ success: false, msg: "update error" });

@@ -46,9 +46,9 @@ app.use("/api/v1/user", users);
 app.use("/api/v1/categories", categories);
 app.use("/api/v1/centers", centers);
 app.use("/api/v1/sessions", sessions);
-app.use("/api/v1/offers", offers);
 app.use("/api/v1/advertisements", advertisements);
-app.use("/api/v1/orders", checkAuth, orders);
+app.use("/api/v1/offers", offers);
+app.use("/api/v1/orders", orders);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
