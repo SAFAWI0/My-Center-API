@@ -24,8 +24,59 @@ async function getCentersByCat(req, res) {
   res.send(result.rows);
 }
 
+async function addCenters(req, res) {
+  let {
+    center_name,
+    cover_img,
+    logo,
+    Evaluation,
+    work_time,
+    details,
+    phone,
+    lag,
+    lat,
+    write_website,
+    cat_id,
+  } = req.body;
+  const result = await client.query(
+    `INSERT INTO centers (center_name, cover_img,logo ,Evaluation ,work_time,details ,phone ,lag ,lat,write_website,cat_id ) VALUES 
+    ('${center_name}','${cover_img}','${logo}','${Evaluation}','${work_time}','${details}','${phone}','${lag}','${lat}','${write_website}','${cat_id}') RETURNING *`
+  );
+  res.send(result.rows);
+}
+
+async function updateCenters(req, res) {
+  let center_id = req.params.id;
+  let {
+    center_name,
+    cover_img,
+    logo,
+    Evaluation,
+    work_time,
+    details,
+    phone,
+    lag,
+    lat,
+    write_website,
+    cat_id,
+  } = req.body;
+  const result = await client.query(`UPDATE centers
+  SET center_name = '${center_name}' , cover_img = '${cover_img}',logo = '${logo}', write_website = '${write_website}',cat_id = '${cat_id}' , Evaluation = '${Evaluation}',work_time = '${work_time}' , details = '${details}',lag = '${lag}',phone = '${phone}' , lat = '${lat}'  WHERE center_id = ${center_id} RETURNING *`);
+  res.send(result.rows);
+}
+
+async function deleteCenters(req, res) {
+  let center_id = req.params.id;
+  const result = await client.query(`DELETE FROM centers
+  WHERE center_id = ${center_id} RETURNING *`);
+  res.send(result.rows);
+}
+
 module.exports = {
   getCenters,
   getCentersByCat,
   getCentersById,
+  addCenters,
+  updateCenters,
+  deleteCenters,
 };

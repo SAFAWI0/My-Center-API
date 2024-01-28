@@ -57,7 +57,7 @@ CREATE TABLE orders (
     user_id INTEGER REFERENCES users(user_id),
     ses_id INTEGER REFERENCES sessions(ses_id),
     center_id INTEGER REFERENCES centers(center_id),
-    offer_id INTEGER REFERENCES offers(offer_id),
+    //offer_id INTEGER REFERENCES offers(offer_id),
     price DECIMAL(10, 2),
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -5,30 +5,53 @@ async function getSessions(req, res) {
   res.send(result.rows);
 }
 async function addsession(req, res) {
+  let {
+    ses_name,
+    img,
+    video,
+    details,
+    evaluation,
+    price,
+    session_time,
+    nu_ssession,
+    center_id,
+  } = req.body;
 
-  let { ses_name,img,video,details,center_id,evaluation, price, session_time, nu_ssession } = req.body;
-  try {
-    const result =
-  await client.query(`insert into Sessions(ses_name,img,video,details,center_id,evaluation, price, session_time, nu_ssession)
-    values('${ses_name}','${img}','${video}','${ses_id}','${details}','${center_id}','${evaluation}','${price}','${session_time}','${nu_ssession}')  `);
+  const result = await client.query(
+    `insert into Sessions(ses_name,img,video,details,evaluation, price, session_time, nu_ssession,center_id)
+    values('${ses_name}','${img}','${video}','${details}','${evaluation}','${price}','${session_time}','${nu_ssession}','${center_id}')RETURNING *  `
+  );
+  res.send(result.rows);
+}
 
-res.send({
-  success: true,
-  user: result.rows[0],
-});
-    
-  } catch (error) {
-    res.send({
-      success: false,
-        Error:error,
-    });
-        
-    
-  }
-  
+async function updateSession(req, res) {
+  let ses_id = req.params.id;
+  let {
+    ses_name,
+    img,
+    video,
+    details,
+    evaluation,
+    price,
+    session_time,
+    nu_ssession,
+    center_id,
+  } = req.body;
+  const result = await client.query(`UPDATE Sessions
+  SET ses_name = '${ses_name}' , img = '${img}',video = '${video}' , details = '${details}',evaluation = '${evaluation}' , session_time = '${session_time}',center_id = '${center_id}',nu_ssession = '${nu_ssession}' , price = '${price}'  WHERE ses_id = ${ses_id} RETURNING *`);
+  res.send(result.rows);
+}
+
+async function deleteSession(req, res) {
+  let ses_id = req.params.id;
+  const result = await client.query(`DELETE FROM Sessions
+  WHERE ses_id = ${ses_id} RETURNING *`);
+  res.send(result.rows);
 }
 
 module.exports = {
-    getSessions,
-    addsession,
+  getSessions,
+  addsession,
+  updateSession,
+  deleteSession,
 };
