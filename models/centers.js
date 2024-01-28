@@ -33,14 +33,14 @@ async function addCenters(req, res) {
     work_time,
     details,
     phone,
-    lag,
+    lng,
     lat,
     write_website,
     cat_id,
   } = req.body;
   const result = await client.query(
-    `INSERT INTO centers (center_name, cover_img,logo ,Evaluation ,work_time,details ,phone ,lag ,lat,write_website,cat_id ) VALUES 
-    ('${center_name}','${cover_img}','${logo}','${Evaluation}','${work_time}','${details}','${phone}','${lag}','${lat}','${write_website}','${cat_id}') RETURNING *`
+    `INSERT INTO centers (center_name, cover_img,logo ,Evaluation ,work_time,details ,phone ,lng ,lat,write_website,cat_id ) VALUES 
+    ('${center_name}','${cover_img}','${logo}','${Evaluation}','${work_time}','${details}','${phone}','${lng}','${lat}','${write_website}','${cat_id}') RETURNING *`
   );
   res.send(result.rows);
 }
@@ -55,13 +55,13 @@ async function updateCenters(req, res) {
     work_time,
     details,
     phone,
-    lag,
+    lng,
     lat,
     write_website,
     cat_id,
   } = req.body;
   const result = await client.query(`UPDATE centers
-  SET center_name = '${center_name}' , cover_img = '${cover_img}',logo = '${logo}', write_website = '${write_website}',cat_id = '${cat_id}' , Evaluation = '${Evaluation}',work_time = '${work_time}' , details = '${details}',lag = '${lag}',phone = '${phone}' , lat = '${lat}'  WHERE center_id = ${center_id} RETURNING *`);
+  SET center_name = '${center_name}' , cover_img = '${cover_img}',logo = '${logo}', write_website = '${write_website}',cat_id = '${cat_id}' , Evaluation = '${Evaluation}',work_time = '${work_time}' , details = '${details}',lng = '${lng}',phone = '${phone}' , lat = '${lat}'  WHERE center_id = ${center_id} RETURNING *`);
   res.send(result.rows);
 }
 
