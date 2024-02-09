@@ -6,12 +6,14 @@ async function getOrders(req, res) {
 }
 
 async function addOrders(req, res) {
-  let { items } = req.body;
-  const result = await client.query( "INSERT INTO orders ( items) VALUES ($1) RETURNING *",
-  [ JSON.stringify(items)]
+  let { items, phone, name } = req.body;
+  const result = await client.query(
+    "INSERT INTO orders (items, phone, name) VALUES ($1, $2, $3) RETURNING *",
+    [JSON.stringify(items), phone, name]
   );
   res.send(result.rows);
 }
+
 
 module.exports = {
   getOrders,

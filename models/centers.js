@@ -2,8 +2,9 @@ const client = require("../db/index");
 
 async function getCenters(req, res) {
   let search = req.query.search || "";
+  let limit = req.query.limit || 999;
   const result = await client.query(
-    `SELECT * FROM centers WHERE center_name ILIKE '%${search}%'`
+    `SELECT * FROM centers WHERE center_name ILIKE '%${search}%' LIMIT ${limit}`
   );
   res.send(result.rows);
 }
@@ -11,7 +12,7 @@ async function getCenters(req, res) {
 async function getCentersById(req, res) {
   let id = req.params.id;
   const result = await client.query(
-    `SELECT * FROM centers WHERE center_id =${id}`
+    `SELECT * FROM centers WHERE center_id =${id} `
   );
   res.send(result.rows);
 }
