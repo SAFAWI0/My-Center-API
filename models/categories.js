@@ -2,7 +2,7 @@ const client = require("../db/index");
 
 async function getCategories(req, res) {
   let id = req.params.id;
-  const result = await client.query(`SELECT * FROM categoriesWHERE ses_id =${id}`);
+  const result = await client.query(`SELECT * FROM categories `);
   res.send(result.rows);
 }
 

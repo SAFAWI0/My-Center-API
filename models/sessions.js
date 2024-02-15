@@ -5,6 +5,7 @@ async function getSessions(req, res) {
   const result = await client.query(`SELECT * FROM Sessions WHERE center_id =${id}`);
   res.send(result.rows);
 }
+
 async function addsession(req, res) {
   let {
     ses_name,
