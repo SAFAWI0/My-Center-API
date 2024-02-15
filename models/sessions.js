@@ -1,7 +1,8 @@
 const client = require("../db/index");
 
 async function getSessions(req, res) {
-  const result = await client.query(`SELECT * FROM Sessions`);
+  let id = req.params.id;
+  const result = await client.query(`SELECT * FROM Sessions WHERE center_id =${id}`);
   res.send(result.rows);
 }
 async function addsession(req, res) {

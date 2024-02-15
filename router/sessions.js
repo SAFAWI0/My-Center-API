@@ -7,7 +7,7 @@ const {
 } = require("../models/sessions");
 const router = express.Router();
 
-router.get("/show", getSessions);
+router.get("/show/:id", getSessions);
 router.post("/add", addsession);
 router.put("/update/:id", updateSession);
 router.delete("/delete/:id", deleteSession);
