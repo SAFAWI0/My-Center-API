@@ -4,7 +4,7 @@ async function getCenters(req, res) {
   let search = req.query.search || "";
   let limit = req.query.limit || 999;
   const result = await client.query(
-    `SELECT * FROM centers WHERE center_name ILIKE '%${search}%' LIMIT ${limit}`
+    `SELECT * FROM centers WHERE center_name ILIKE '%${search}%' ORDER BY RANDOM() LIMIT ${limit}`
   );
   res.send(result.rows);
 }
