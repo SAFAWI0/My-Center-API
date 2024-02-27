@@ -8,6 +8,7 @@ const sessions = require("./router/sessions");
 const offers = require("./router/offers");
 const advertisements = require("./router/advertisements");
 const orders = require("./router/orders");
+const support = require("./router/support");
 const checkAuth = require("./middleware/middleware");
 const fileUpload = require("express-fileupload");
 const { uploadFile } = require("@uploadcare/upload-client");
@@ -49,6 +50,7 @@ app.use("/api/v1/sessions", sessions);
 app.use("/api/v1/advertisements", advertisements);
 app.use("/api/v1/offers", offers);
 app.use("/api/v1/orders", orders);
+app.use("/api/v1/support", support);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
